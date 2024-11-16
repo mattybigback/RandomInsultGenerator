@@ -1,19 +1,21 @@
 #include "DebouncedButton.hpp"
 
-DebouncedButton::DebouncedButton(uint8_t pin, uint32_t delay) {
+DebouncedButton::DebouncedButton(uint8_t pin, uint32_t delay, bool activeState) {
     buttonPin = pin;
     debounceDelay = delay;
     lastDebounceTime = 0;
-    lastButtonState = HIGH;
-    buttonState = HIGH;
-    lastDebouncedState = HIGH;
+    lastButtonState = !activeState; // Start in the opposite state
+    buttonState = !activeState;    // Start in the opposite state
+    lastDebouncedState = !activeState; // Start in the opposite state
     pressedEvent = false;
     releasedEvent = false;
+    this->activeState = activeState; // Store the active state
     pinMode(buttonPin, INPUT);
 }
 
+
 void DebouncedButton::update() {
-    int reading = digitalRead(buttonPin);
+    bool reading = digitalRead(buttonPin);
 
     if (reading != lastButtonState) {
         lastDebounceTime = millis(); // Reset debounce timer
@@ -25,9 +27,9 @@ void DebouncedButton::update() {
             buttonState = reading;
 
             // Detect pressed and released events
-            if (buttonState == LOW && lastDebouncedState == HIGH) {
+            if (buttonState == activeState && lastDebouncedState != activeState) {
                 pressedEvent = true;  // Button was just pressed
-            } else if (buttonState == HIGH && lastDebouncedState == LOW) {
+            } else if (buttonState != activeState && lastDebouncedState == activeState) {
                 releasedEvent = true; // Button was just released
             }
 
@@ -38,11 +40,14 @@ void DebouncedButton::update() {
     lastButtonState = reading;
 }
 
+
 bool DebouncedButton::isPressed() {
-    return buttonState == LOW; // Adjust if your button logic is reversed
+    this->update();
+    return buttonState == activeState; // Return true if the button matches the active state
 }
 
 bool DebouncedButton::wasPressed() {
+    this->update();
     if (pressedEvent) {
         pressedEvent = false; // Reset the event flag
         return true;
@@ -51,6 +56,7 @@ bool DebouncedButton::wasPressed() {
 }
 
 bool DebouncedButton::wasReleased() {
+    this->update();
     if (releasedEvent) {
         releasedEvent = false; // Reset the event flag
         return true;
@@ -58,6 +64,7 @@ bool DebouncedButton::wasReleased() {
     return false;
 }
 
-int DebouncedButton::getState() {
+uint8_t DebouncedButton::getState() {
+    this->update();
     return buttonState;
 }

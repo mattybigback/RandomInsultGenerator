@@ -5,15 +5,30 @@
 
 #include <Arduino.h>
 
+/**
+ * @class RandomNoDupes
+ * @brief Generates random numbers within a specified range, ensuring no consecutive duplicates.
+ */
 class RandomNoDupes {
   private:
-    uint8_t lastRandom;
+    uint8_t lastRandom; ///< Stores the last generated random number.
 
   public:
-    // Constructor initializes lastRandom to an impossible value
+    /**
+     * @brief Constructs a new RandomNoDupes object.
+     * 
+     * Initializes the last random number to 255.
+     */
     RandomNoDupes();
 
-    // Generates a new random number within the given range that is not equal to lastRandom
+    /**
+     * @brief Generates a random number within the specified range.
+     * 
+     * Ensures that the returned random number is not equal to the previously generated number.
+     * 
+     * @param range The range of random numbers (0 to range - 1).
+     * @return A random number within the specified range.
+     */
     uint8_t next(uint8_t range);
 };
 
