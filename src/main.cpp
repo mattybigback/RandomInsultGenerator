@@ -10,11 +10,8 @@ uint32_t timer = 0;
 uint32_t timerOld = 0;
 
 LiquidCrystal lcd(LCD_RS, LCD_EN, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
-DebouncedButton btnInsult(BUTTON_PIN, 100);
-
-
+DebouncedButton btnInsult(BUTTON_PIN, 50, LOW);
 RandomNoDupes rndSplash;
-
 
 void setup() {
     debugSetup(BAUD_RATE);
@@ -32,7 +29,6 @@ void setup() {
 }
 
 void loop() {
-    btnInsult.update();
     if (btnInsult.wasPressed()) {  // If the button is in a different state to the last reading call the insult function
             insultMe();
     }
@@ -93,7 +89,7 @@ void splashScreen() {
         int8_t scrollPosition = -LCD_WIDTH;
         while (scrollPosition < msgLength + 1) {
             timer = millis();
-            btnInsult.update();
+            //btnInsult.update();
             if (timer - timerOld >= scrollTick) {
                 updateScrollBuffer(buffer, progmemMessage, scrollPosition, LCD_WIDTH);
                 lcd.setCursor(0, 1);
