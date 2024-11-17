@@ -85,14 +85,7 @@ extern uint8_t screenNumber;
 extern uint8_t brightness;
 
 extern LiquidCrystal lcd;
-
 extern DebouncedButton btnInsult;
 
-
-// void splashScreen();
-// void insultMe();
-// void copyMessageSubset(char *dest, const char *progmemMessage, uint8_t start, uint8_t length);
-// void printMessage(char *message);
-// void updateScrollBuffer(char *buffer, const char *message, int scrollPosition, uint8_t bufferSize);
 
 #endif

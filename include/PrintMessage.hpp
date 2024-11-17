@@ -3,6 +3,6 @@
 
 #include "main.hpp"
 
-void printMessage(const char* message);
+ void printMessage(char *message);
 
 #endif
