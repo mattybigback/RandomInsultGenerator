@@ -11,7 +11,6 @@ uint32_t timerOld = 0;
 
 LiquidCrystal lcd(LCD_RS, LCD_EN, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
 DebouncedButton btnInsult(BUTTON_PIN, 50, LOW);
-RandomNoDupes rndSplash;
 
 void setup() {
     debugSetup(BAUD_RATE);
@@ -63,79 +62,4 @@ void loop() {
             debugPrintLn("Screen powered down");
         }
     }
-}
-
-void splashScreen() {
-    debugPrintLn("Splash screen loaded");
-    brightness = 255;
-    screenNumber = 0;              // Set the screen status variable to 0
-    timerOld = timer;              // Store the current value of the timer variable in the timerOld variable
-    lcd.clear();                   // Clear screen (sometimes it loads up with garbage)
-    lcd.setCursor(0, 0);           // Set the cursor to row 0, column 0
-    lcd.print("INSULTATRON 9000"); // Print splash text
-    lcd.setCursor(0, 1);           // Set the cursor to row 1, column 0
-
-    // Scroll buffer
-    char buffer[17] = {'\0'};
-
-    analogWrite(BACKLIGHT_PIN, brightness);
-    lcd.display();
-
-    for (uint8_t scrollCount = 0; scrollCount < 2; scrollCount++) {
-        // Pointer to one of the progmem arrays that contain splash screen messages
-        const char *progmemMessage;
-        memcpy_P(&progmemMessage, &splashMessage_table[rndSplash.next(splashCount)], sizeof(progmemMessage));
-        uint8_t msgLength = strlen_P(progmemMessage);
-        int8_t scrollPosition = -LCD_WIDTH;
-        while (scrollPosition < msgLength + 1) {
-            timer = millis();
-            //btnInsult.update();
-            if (timer - timerOld >= scrollTick) {
-                updateScrollBuffer(buffer, progmemMessage, scrollPosition, LCD_WIDTH);
-                lcd.setCursor(0, 1);
-                lcd.print(buffer);
-                debugPrintLn(buffer);
-                scrollPosition++;
-                timerOld = timer;
-            }
-            if (btnInsult.wasPressed()) {
-                insultMe();
-                return;
-            }
-        }
-    }
-    debugPrintLn("Finished scrolling");
-}
-
-void copyMessageSubset(char *dest, const char *progmemMessage, uint8_t start, uint8_t length) {
-    for (uint8_t i = 0; i < length; i++) {
-        dest[i] = pgm_read_byte(progmemMessage + start + i);
-    }
-    dest[length] = '\0'; // Null-terminate the string
-}
-
-void updateScrollBuffer(char *buffer, const char *message, int scrollPosition, uint8_t bufferSize) {
-    memset(buffer, ' ', bufferSize);
-    buffer[bufferSize] = '\0';
-
-    for (uint8_t bufferIndex = 0; bufferIndex < bufferSize; bufferIndex++) {
-        int8_t msgIndex = scrollPosition + bufferIndex;
-        if (msgIndex >= 0 && msgIndex < strlen_P(message)) {
-            buffer[bufferIndex] = pgm_read_byte(&message[msgIndex]);
-        }
-        // No need for else clause since buffer is already filled with spaces
-    }
-}
-
-uint8_t randomNoDupes(uint8_t lastRandom, uint8_t range) {
-    if (range < 2) {
-        // Handle the edge case where range is less than 2
-        return !lastRandom;
-    }
-    uint8_t newRandom = random(range);
-    if (newRandom != lastRandom) {
-        return newRandom;
-    }
-    // Return the result of the recursive call
-    return randomNoDupes(lastRandom, range);
 }

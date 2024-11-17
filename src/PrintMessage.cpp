@@ -1,4 +1,4 @@
-#include "printMessage.hpp"
+#include "PrintMessage.hpp"
 
 void printMessage(char* message) {
   uint8_t lineLength = 0; // Current line length

@@ -1,4 +1,4 @@
-#include "insultMe.hpp"
+#include "InsultMe.hpp"
 
 RandomNoDupes rndInsult;
 RandomNoDupes rndObservation;

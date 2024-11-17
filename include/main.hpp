@@ -23,14 +23,12 @@
 #include <DebouncedButton.hpp>
 #include <RandomNoDupes.hpp>
 // Word Tables
-#include <AdjectiveTable.hpp>
-#include <CommandTable.hpp>
-#include <InsultTable.hpp>
-#include <ObservationTable.hpp>
-#include <SplashMessages.hpp>
+#include <Tables.hpp>
 
-#include "printMessage.hpp"
-#include "insultMe.hpp"
+#include "PrintMessage.hpp"
+#include "InsultMe.hpp"
+#include "SplashScreen.hpp"
+#include "StringUtils.hpp"
 
 //Pin Assignments
 #define BUTTON_PIN A0
@@ -68,7 +66,7 @@
 
 const uint16_t insultTime = 8000;
 const uint16_t splashTime = 10000;
-const uint16_t scrollTick = 250;
+const uint16_t scrollTick = 300;
 
 // Holds the current and last states of the button
 extern uint8_t buttonState;
@@ -83,15 +81,7 @@ extern uint8_t screenNumber;
 extern uint8_t brightness;
 
 extern LiquidCrystal lcd;
-
 extern DebouncedButton btnInsult;
 
-
-void splashScreen();
-void insultMe();
-void copyMessageSubset(char *dest, const char *progmemMessage, uint8_t start, uint8_t length);
-void printMessage(char *message);
-void updateScrollBuffer(char *buffer, const char *message, int scrollPosition, uint8_t bufferSize);
-uint8_t randomNoDupes(uint8_t lastRandom, uint8_t range);
 
 #endif
