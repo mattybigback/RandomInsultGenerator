@@ -18,7 +18,7 @@ void splashScreen() {
 
     for (uint8_t scrollCount = 0; scrollCount < 2; scrollCount++) {
         const char *progmemMessage;
-        memcpy_P(&progmemMessage, &splashMessage_table[rndSplash.next(scrollCount)], sizeof(progmemMessage));
+        memcpy_P(&progmemMessage, &splashMessage_table[rndSplash.next(splashCount)], sizeof(progmemMessage));
         uint8_t msgLength = strlen_P(progmemMessage);
         int8_t scrollPosition = -LCD_WIDTH;
 
