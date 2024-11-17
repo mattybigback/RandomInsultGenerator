@@ -23,11 +23,7 @@
 #include <DebouncedButton.hpp>
 #include <RandomNoDupes.hpp>
 // Word Tables
-#include <AdjectiveTable.hpp>
-#include <CommandTable.hpp>
-#include <InsultTable.hpp>
-#include <ObservationTable.hpp>
-#include <SplashMessages.hpp>
+#include <Tables.hpp>
 
 #include "PrintMessage.hpp"
 #include "InsultMe.hpp"
@@ -70,7 +66,7 @@
 
 const uint16_t insultTime = 8000;
 const uint16_t splashTime = 10000;
-const uint16_t scrollTick = 250;
+const uint16_t scrollTick = 300;
 
 // Holds the current and last states of the button
 extern uint8_t buttonState;
