@@ -29,8 +29,10 @@
 #include <ObservationTable.hpp>
 #include <SplashMessages.hpp>
 
-#include "printMessage.hpp"
-#include "insultMe.hpp"
+#include "PrintMessage.hpp"
+#include "InsultMe.hpp"
+#include "SplashScreen.hpp"
+#include "StringUtils.hpp"
 
 //Pin Assignments
 #define BUTTON_PIN A0
@@ -87,11 +89,10 @@ extern LiquidCrystal lcd;
 extern DebouncedButton btnInsult;
 
 
-void splashScreen();
-void insultMe();
-void copyMessageSubset(char *dest, const char *progmemMessage, uint8_t start, uint8_t length);
-void printMessage(char *message);
-void updateScrollBuffer(char *buffer, const char *message, int scrollPosition, uint8_t bufferSize);
-uint8_t randomNoDupes(uint8_t lastRandom, uint8_t range);
+// void splashScreen();
+// void insultMe();
+// void copyMessageSubset(char *dest, const char *progmemMessage, uint8_t start, uint8_t length);
+// void printMessage(char *message);
+// void updateScrollBuffer(char *buffer, const char *message, int scrollPosition, uint8_t bufferSize);
 
 #endif
