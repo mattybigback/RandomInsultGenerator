@@ -1,17 +1,19 @@
-/*
-    Pin mappings changed to make use of the LCD keypad shield.
-
-    lcd RS pin to digital pin 8
-    lcd Enable pin to digital pin 9
-    lcd D4 pin to digital pin 4
-    lcd D5 pin to digital pin 5
-    lcd D6 pin to digital pin 6
-    lcd D7 pin to digital pin 7
-
-    lcd backlight digital pin 10
-    button to digital pin A0
-    Leave A1 floating    
-*/
+/**
+ * @file main.hpp
+ * @brief Main header file for the project.
+ *
+ * @mainpage Project Documentation
+ *
+ * @section intro_sec Introduction
+ * This is the main header file for the project. It includes key project details.
+ *
+ * @section project_info Project Information
+ * - **Application Name:** Random Insult Generator
+ * - **Repository:** [GitHub](https://github.com/mattybigback/RandomInsultGenerator)
+ * - **Website:** [https://mjharrison.co.uk](https://mjharrison.co.uk)
+ * - **Author:** Matt Harrison
+ * - **Version:** 2.1.0
+ */
 
 #ifndef MAIN_H
 #define MAIN_H
@@ -64,7 +66,7 @@
 #define LCD_HEIGHT 2
 #define BUFFER_SIZE ((LCD_WIDTH * LCD_HEIGHT)+ LCD_HEIGHT) //Enough for a trailing space on each line
 
-
+#define DEBOUNCE_TIME_MS 50
 #define BAUD_RATE 9600
 #define DEBUG 0
 
@@ -80,11 +82,19 @@
     #define debugSetup(x)
 #endif
 
-
+// Screen timings
+// Time to hold an insult on screen
 const uint16_t insultTime = 8000;
+// Time to hold splash on screen
 const uint16_t splashTime = 10000;
-const uint16_t scrollTick = 300;
+// Time between scroll ticks. Lower number = faster scrolling
+const uint16_t scrollTick = 180;
 
+//Message to print on the first row of the splash screen - should be <= LCD_WIDTH
+const char titleRow[] = "INSULTATRON 9000";
+
+
+// External variableas
 // Holds the current and last states of the button
 extern uint8_t buttonState;
 extern uint8_t lastButtonState;

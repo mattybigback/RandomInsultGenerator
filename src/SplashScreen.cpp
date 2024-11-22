@@ -9,7 +9,7 @@ void splashScreen() {
     timerOld = timer;
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("INSULTATRON 9000");
+    lcd.print(titleRow);
     lcd.setCursor(0, 1);
 
     char buffer[LCD_WIDTH + 1] = {'\0'};
