@@ -35,7 +35,33 @@
 #include "SplashScreen.hpp"
 #include "StringUtils.hpp"
 
-//Pin Assignments
+/**
+ * @defgroup PinAssignments Pin Assignments
+ * @brief Defines pin assignments based on the target board.
+ * 
+ * This group contains macros for configuring the pin assignments 
+ * for different target boards:
+ * 
+ * - **UNO Shield:**
+ *   - `BUTTON_PIN`: A0
+ *   - `RANDOM_SEED_PIN`: A1
+ *   - `BACKLIGHT_PIN`: 10
+ *   - `LCD_RS`: 8
+ *   - `LCD_EN`: 9
+ *   - `LCD_D4`, `LCD_D5`, `LCD_D6`, `LCD_D7`: 4, 5, 6, 7
+ * 
+ * - **Nano OLED:**
+ *   - `BUTTON_PIN`: 2
+ *   - `RANDOM_SEED_PIN`: A0
+ *   - `BACKLIGHT_PIN`: 10
+ *   - `LCD_RS`: 7
+ *   - `LCD_RW`: 9
+ *   - `LCD_EN`: 8
+ *   - `LCD_D4`, `LCD_D5`, `LCD_D6`, `LCD_D7`: 3, 4, 5, 6
+ * 
+ * @{
+ */
+
 #ifdef BOARD_UNO_SHIELD
 #define BUTTON_PIN A0
 #define RANDOM_SEED_PIN A1
@@ -47,6 +73,7 @@
 #define LCD_D6 6
 #define LCD_D7 7
 #endif
+
 #ifdef BOARD_NANO_OLED
 #define BUTTON_PIN 2
 #define RANDOM_SEED_PIN A0
@@ -60,11 +87,24 @@
 #define LCD_D7 6
 #endif
 
+/** @} */ // End of PinAssignments
 
-//LCD Properties
+
+/**
+ * @defgroup LCDProperties Display Properties
+ * @brief Macros for defining the size of the display
+ *  * `LCD_WIDTH`: Width of each line in characters
+ *  * `LCD_HEIGHT`: Number of rows that the display has
+ *  * `BUFFER_SIZE`: Size of the buffer required to store a message. Includes a trailing space on each line.
+ * @{
+ */
+
 #define LCD_WIDTH 16
 #define LCD_HEIGHT 2
 #define BUFFER_SIZE ((LCD_WIDTH * LCD_HEIGHT)+ LCD_HEIGHT) //Enough for a trailing space on each line
+
+/** @} */ // End of LCDProperties
+
 
 #define DEBOUNCE_TIME_MS 50
 #define BAUD_RATE 9600
@@ -109,6 +149,5 @@ extern uint8_t brightness;
 
 extern LiquidCrystal lcd;
 extern DebouncedButton btnInsult;
-
 
 #endif
