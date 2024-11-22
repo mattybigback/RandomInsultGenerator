@@ -20,6 +20,9 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 #include <avr/pgmspace.h>
+#ifdef BOARD_NANO_OLED
+#include <Wire.h>
+#endif
 #include <DebouncedButton.hpp>
 #include <RandomNoDupes.hpp>
 // Word Tables
@@ -31,6 +34,7 @@
 #include "StringUtils.hpp"
 
 //Pin Assignments
+#ifdef BOARD_UNO_SHIELD
 #define BUTTON_PIN A0
 #define RANDOM_SEED_PIN A1
 #define BACKLIGHT_PIN 10
@@ -40,6 +44,19 @@
 #define LCD_D5 5
 #define LCD_D6 6
 #define LCD_D7 7
+#endif
+#ifdef BOARD_NANO_OLED
+#define BUTTON_PIN 2
+#define RANDOM_SEED_PIN A0
+#define BACKLIGHT_PIN 10
+#define LCD_RS 7
+#define LCD_RW 9
+#define LCD_EN 8
+#define LCD_D4 3
+#define LCD_D5 4
+#define LCD_D6 5
+#define LCD_D7 6
+#endif
 
 
 //LCD Properties
