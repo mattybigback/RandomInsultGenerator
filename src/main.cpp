@@ -29,6 +29,7 @@ void setup() {
     debugPrintLn(prngSeed);
     randomSeed(prngSeed);             // Seed the random function with unconnected pin
     lcd.begin(LCD_WIDTH, LCD_HEIGHT); // Set up lcd display with correct size
+    lcd.clear();
     timer = millis();                 // Set up timer variable
     splashScreen();                   // Load splash screen
 }
@@ -64,7 +65,6 @@ void loop() {
         }
         if (brightness == 0) {
             lcd.clear();
-            lcd.noDisplay();
             debugPrintLn("Screen powered down");
         }
     }

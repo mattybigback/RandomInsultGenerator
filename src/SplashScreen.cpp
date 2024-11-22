@@ -14,7 +14,6 @@ void splashScreen() {
 
     char buffer[LCD_WIDTH + 1] = {'\0'};
     analogWrite(BACKLIGHT_PIN, brightness);
-    lcd.display();
 
     for (uint8_t scrollCount = 0; scrollCount < 2; scrollCount++) {
         const char *progmemMessage;
