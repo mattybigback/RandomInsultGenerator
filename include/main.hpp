@@ -79,8 +79,8 @@
 #define RANDOM_SEED_PIN A0
 #define BACKLIGHT_PIN 10
 #define LCD_RS 7
-#define LCD_RW 9
-#define LCD_EN 8
+#define LCD_RW 8
+#define LCD_EN 9
 #define LCD_D4 3
 #define LCD_D5 4
 #define LCD_D6 5
