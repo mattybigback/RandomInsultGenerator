@@ -1,9 +1,14 @@
+/**
+ * @file DebouncedButton.hpp
+ * @brief Library for debouncing button presses.
+ */
+
 #ifndef DEBOUNCEDBUTTON_HPP
 #define DEBOUNCEDBUTTON_HPP
 
 #include <Arduino.h>
 
-/**
+/*
  * @brief Constructs a new DebouncedButton object.
  * 
  * @param pin The GPIO pin number connected to the button.

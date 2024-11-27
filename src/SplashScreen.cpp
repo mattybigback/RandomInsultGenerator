@@ -9,12 +9,11 @@ void splashScreen() {
     timerOld = timer;
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("INSULTATRON 9000");
+    lcd.print(titleRow);
     lcd.setCursor(0, 1);
 
     char buffer[LCD_WIDTH + 1] = {'\0'};
     analogWrite(BACKLIGHT_PIN, brightness);
-    lcd.display();
 
     for (uint8_t scrollCount = 0; scrollCount < 2; scrollCount++) {
         const char *progmemMessage;

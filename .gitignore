@@ -4,4 +4,6 @@
 .vscode/launch.json
 .vscode/ipch
 include/CustomInsults/*
+Doxyfile
+docs/
 !include/CustomInsults/CustomInsults.md

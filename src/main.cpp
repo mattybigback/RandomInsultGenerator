@@ -9,8 +9,14 @@ uint8_t brightness = 0xFF;
 uint32_t timer = 0;
 uint32_t timerOld = 0;
 
+#ifdef BOARD_UNO_SHIELD
 LiquidCrystal lcd(LCD_RS, LCD_EN, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
-DebouncedButton btnInsult(BUTTON_PIN, 50, LOW);
+#endif
+#ifdef BOARD_NANO_OLED
+LiquidCrystal lcd(LCD_RS, LCD_RW, LCD_EN, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
+#endif
+
+DebouncedButton btnInsult(BUTTON_PIN, DEBOUNCE_TIME_MS, LOW);
 
 void setup() {
     debugSetup(BAUD_RATE);
@@ -23,6 +29,7 @@ void setup() {
     debugPrintLn(prngSeed);
     randomSeed(prngSeed);             // Seed the random function with unconnected pin
     lcd.begin(LCD_WIDTH, LCD_HEIGHT); // Set up lcd display with correct size
+    lcd.clear();
     timer = millis();                 // Set up timer variable
     splashScreen();                   // Load splash screen
 }
@@ -58,7 +65,6 @@ void loop() {
         }
         if (brightness == 0) {
             lcd.clear();
-            lcd.noDisplay();
             debugPrintLn("Screen powered down");
         }
     }
