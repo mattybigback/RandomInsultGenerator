@@ -51,13 +51,18 @@
  *   - `LCD_D4`, `LCD_D5`, `LCD_D6`, `LCD_D7`: 4, 5, 6, 7
  * 
  * - **Nano OLED:**
- *   - `BUTTON_PIN`: 2
- *   - `RANDOM_SEED_PIN`: A0
- *   - `BACKLIGHT_PIN`: 10
- *   - `LCD_RS`: 7
- *   - `LCD_RW`: 9
- *   - `LCD_EN`: 8
- *   - `LCD_D4`, `LCD_D5`, `LCD_D6`, `LCD_D7`: 3, 4, 5, 6
+ * | **Pin Name**      | **Arduino Pin Definition** | **AVR Pin Definition** | **DIP28 Pin Number** | **QFP32 Pin Number** |
+ * |-------------------|----------------------------|------------------------|----------------------|----------------------|
+ * | `BUTTON_PIN`      | 2                          | PD2                    | 5                    | 32                   |
+ * | `RANDOM_SEED_PIN` | A0                         | ADC0                   | 23                   | 23                   |
+ * | `BACKLIGHT_PIN`   | 10                         | PB2                    | 16                   | 14                   |
+ * | `LCD_RS`          | 7                          | PD7                    | 13                   | 11                   |
+ * | `LCD_RW`          | 9                          | PB1                    | 15                   | 13                   |
+ * | `LCD_EN`          | 8                          | PB0                    | 14                   | 12                   |
+ * | `LCD_D4`          | 3                          | PD3                    | 5                    | 1                    |
+ * | `LCD_D5`          | 4                          | PD4                    | 6                    | 2                    |
+ * | `LCD_D6`          | 5                          | PD5                    | 11                   | 9                    |
+ * | `LCD_D7`          | 6                          | PD6                    | 12                   | 10                   |
  * 
  * @{
  */
@@ -105,7 +110,7 @@
 
 /** @} */ // End of LCDProperties
 
-
+#define SPLASH_SCROLL_COUNT 3
 #define DEBOUNCE_TIME_MS 50
 #define BAUD_RATE 9600
 #define DEBUG 0
@@ -132,7 +137,6 @@ const uint16_t scrollTick = 180;
 
 //Message to print on the first row of the splash screen - should be <= LCD_WIDTH
 const char titleRow[] = "INSULTATRON 9000";
-
 
 // External variableas
 // Holds the current and last states of the button
